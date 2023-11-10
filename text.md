@@ -1,58 +1,66 @@
 # Текст для презентации
-## 1. Вспоминаем как запускается java приложение
-```shell
-java -jar app.jar  
-  
-java может сделать вид что jar это модуль, но у модуля есть требование к его наименованию его имя должно соотвествовать 
-корневому экспортируемому пакету, например  
-java.desktop.jmod, java.logging.jmod, jdk.xml.dom.jmod   
-Правила именования модулей аналогичны тому, как мы называем пакеты (точки разрешены, тире - нет). 
-Очень часто используются имена в стиле project (my.module) или Reverse-DNS (com.baeldung.mymodule). 
-В этом руководстве мы будем использовать стиль проекта.
+## 1. Вступление
 
-There are four types of modules in the new module system:  
-System Modules – These are the modules listed when we run the list-modules command above. They include the Java SE and JDK modules.  
-Application Modules – These modules are what we usually want to build when we decide to use Modules. They are named and defined in the compiled module-info.class file included in the assembled JAR.  
-Automatic Modules – We can include unofficial modules by adding existing JAR files to the module path. The name of the module will be derived from the name of the JAR. Automatic modules will have full read access to every other module loaded by the path.  
-Unnamed Module – When a class or JAR is loaded onto the classpath, but not the module path, it’s automatically added to the unnamed module. It’s a catch-all module to maintain backward compatibility with previously-written Java code.  
+## 2. Вспоминаем как запускается java приложение
+### 2.1 classpath
 
-```
-```shell
-Hello World!
-```
-![alt text](./image/unpackaged_jar.png "unpackaged jar")
-![alt text](./image/manifest_main.png "manifest main class")
-```kotlin
-tasks.withType<Jar> {
-    manifest {
-        attributes["Main-Class"] = "fully.qualified.MainClass"
-    }
-}
-```
-```xml
-<project>
-  ...
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-jar-plugin</artifactId>
-        ...
-        <configuration>
-          <archive>
-            <manifest>
-              <addClasspath>true</addClasspath>
-              <mainClass>fully.qualified.MainClass</mainClass>
-            </manifest>
-          </archive>
-        </configuration>
-        ...
-      </plugin>
-    </plugins>
-  </build>
-  ...
-</project>
-```
+![alt text](image/part1/plain-cp.png "plain classpath")
+
+### 2.2 jar
+
+![alt text](image/part1/plain-jar.png "plain jar")  
+
+![alt text](image/part1/plain-jar-manifest.png "plain jar")  
+
+![alt text](image/part1/plain-jar-manifest-gradle.png "plain jar manifest gradle")
+
+
+
+### 2.3 java modules
+
+![alt text](image/part1/plain-module-path.png "plain module-path")
+
+![alt text](image/part1/plain-module-path-dash.png "plain module-path")
+
+![alt text](image/part1/plain-module-path-dash-fixed.png "plain module-path")
+
+![alt text](image/part1/plain-module-path-dash-version.png "plain module-path")
+
+
+
+#### 2.3.1 почему это работает
+ * System Modules - модули jdk
+ * Application Modules - модули уровня приложения подготовлены с использованием инструментария, 
+содержат определения модуля в 
+ * Automatic Modules - "неофициальные модули", можно добавить существующие jar файлы в module-path, название модуля будет
+произведено на основе имени файла
+ * Unnamed Module - к неименованному модулю будут добавлены все классы и jar, добавленные 
+в classpath но не через module-path 
+
+#### 2.3.2 требования
+У модуля есть требования к его наименованию. Имя в нижнем регистре, разделитель точка. При этом
+можно использовать либо стиль наименования проектов (app.module), либо reverse.dns (org.company.app.module). Например модули jdk 
+имеют такие наименования java.desktop, java.logging, jdk.xml.dom
+
+# 3. Как запускается spring boot приложение
+## 3.1 jar
+
+![alt text](image/part1/spring-jar.png "plain classpath")
+
+## 3.2 classpath
+
+![alt text](image/part1/spring-cp-error.png "plain classpath")
+
+![alt text](image/part1/spring-manifest.png "plain classpath")
+
+
+
+
+
+
+
+
+
 ## 2. Изучаем как запускается spring boot приложение (JarLauncher, PropertiesLauncher)
 
 **classpath.idx** - определяет последовательность добавления jar в classpath  
