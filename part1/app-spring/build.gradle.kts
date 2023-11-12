@@ -15,6 +15,9 @@ tasks.withType<Jar> {
 }
 
 tasks.withType<BootJar> {
+	manifest {
+		attributes["Start-Class"] = "fully.qualified.MainClazz"
+	}
 	enabled = true
 	archiveFileName.set("app.jar")
 }

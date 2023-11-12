@@ -2,11 +2,11 @@
 ## 1. Вступление
 
 ## 2. Вспоминаем как запускается java приложение
-### 2.1 classpath
+### 2.1 plain classpath
 
 ![alt text](image/part1/plain-cp.png "plain classpath")
 
-### 2.2 jar
+### 2.2 plain jar
 
 ![alt text](image/part1/plain-jar.png "plain jar")  
 
@@ -16,7 +16,7 @@
 
 
 
-### 2.3 java modules
+### 2.3 plain java modules
 
 ![alt text](image/part1/plain-module-path.png "plain module-path")
 
@@ -43,20 +43,46 @@
 имеют такие наименования java.desktop, java.logging, jdk.xml.dom
 
 # 3. Как запускается spring boot приложение
-## 3.1 jar
+## 3.1 spring jar
 
 ![alt text](image/part1/spring-jar.png "plain classpath")
 
-## 3.2 classpath
+## 3.2 spring classpath
 
 ![alt text](image/part1/spring-cp-error.png "plain classpath")
 
 ![alt text](image/part1/spring-manifest.png "plain classpath")
 
+![alt text](image/part1/spring-not-found-main.png "plain classpath")
 
+![alt text](image/part1/spring-start-class.png "plain classpath")
 
+```text
+Launcher - create class loader, load start class
+      |
+    ExecutableArchiveLauncher - classpath.idx, layers.idx
+      |  |
+      | JarLauncher - psvm
+      |          
+    PropertiesLauncher - psvm
+```
 
+![alt text](image/part1/spring-jarlauncher.png "plain classpath")
 
+![alt text](image/part1/spring-propertieslauncher.png "plain classpath")
+
+## 3.3 spring java modules
+
+![alt text](image/part1/spring-module-path.png "plain classpath")
+С помощью лаунчера PropertiesLauncher и ключа loader.path мы можем указать спрингу, что ещё нужно догрузить и 
+инициализировать, помимо основного jar.
+
+# 4. Варианты сформировать classpath на этапе старта приложения
+| Вариант старта                                                                               |   |
+|----------------------------------------------------------------------------------------------|---|
+| java -cp app.jar:./modules/* org.springframework.boot.loader.JarLauncher                     |   |
+| java -cp app.jar -Dloader.path=./modules/ org.springframework.boot.loader.PropertiesLauncher |   |
+| java --module-path app.jar:./modules/ --module app                                           |   |
 
 
 
