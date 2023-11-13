@@ -78,11 +78,13 @@ Launcher - create class loader, load start class
 инициализировать, помимо основного jar.
 
 # 4. Варианты сформировать classpath на этапе старта приложения
-| Вариант старта                                                                               |   |
-|----------------------------------------------------------------------------------------------|---|
-| java -cp app.jar:./modules/* org.springframework.boot.loader.JarLauncher                     |   |
-| java -cp app.jar -Dloader.path=./modules/ org.springframework.boot.loader.PropertiesLauncher |   |
-| java --module-path app.jar:./modules/ --module app                                           |   |
+![alt text](image/part2/spring-lib-bean.png "plain classpath")
+
+| Вариант старта                                                                                 | Бин загружен |
+|------------------------------------------------------------------------------------------------|--------------|
+| java -cp 'app.jar:./modules/*' org.springframework.boot.loader.JarLauncher                     | Нет          |
+| java -Dloader.path='./modules/' -cp app.jar org.springframework.boot.loader.PropertiesLauncher | Да           |
+| java --module-path 'app.jar:./modules/*' --module app                                          | Нет          |
 
 
 
