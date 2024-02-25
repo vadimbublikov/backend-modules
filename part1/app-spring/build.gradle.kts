@@ -16,10 +16,10 @@ tasks.withType<Jar> {
 
 tasks.withType<BootJar> {
 	manifest {
-		attributes["Start-Class"] = "fully.qualified.MainClazz"
+		attributes["Start-Class"] = "fully.qualified.MainClass"
 	}
 	enabled = true
-	archiveFileName.set("app.jar")
+	archiveFileName.set("spring-app.jar")
 }
 
 dependencies {
