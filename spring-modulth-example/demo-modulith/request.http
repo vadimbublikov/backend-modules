@@ -1,0 +1,28 @@
+POST http://localhost:8080/catalog/list
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:8080/catalog/product-to-cart
+Content-Type: application/json
+
+{ "productId": "grill" }
+
+###
+POST http://localhost:8080/catalog/product-to-order
+Content-Type: application/json
+
+{ "productId": "grill" }
+
+###
+POST http://localhost:8080/cart/list
+Content-Type: application/json
+
+{}
+
+###
+POST http://localhost:8080/cart/order
+Content-Type: application/json
+
+{}
