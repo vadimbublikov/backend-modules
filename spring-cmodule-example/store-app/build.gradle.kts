@@ -24,13 +24,19 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.boot:spring-boot-starter-jdbc")
 	implementation("org.springframework.boot:spring-boot-starter-data-jpa")
+	implementation("org.springframework.boot:spring-boot-starter-web")
+	implementation("org.springframework.modulith:spring-modulith-events-core:1.2.3")
+	implementation("org.springframework.modulith:spring-modulith-events-jdbc:1.2.3")
+	implementation("org.springframework.modulith:spring-modulith-events-jackson:1.2.3")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerializationJson")
 	implementation("org.liquibase:liquibase-core")
 
+	//implementation("org.postgresql:postgresql")
 	runtimeOnly("com.h2database:h2")
+
 	runtimeOnly("org.springframework.boot:spring-boot-starter-actuator")
 
 	testImplementation("org.springframework.boot:spring-boot-starter-test")

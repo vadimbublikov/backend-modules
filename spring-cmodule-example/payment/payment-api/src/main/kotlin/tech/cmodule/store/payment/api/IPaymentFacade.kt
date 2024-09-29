@@ -21,9 +21,14 @@ data class PaymentProcessRs(
 )
 
 /**
- * Event about payment processed
+ * Event, about the payment has processed
  */
 data class PaymentProcessed(
     val paymentId: String,
-    val amount: BigDecimal
+    val currency: Currency,
+    val amount: Amount
 )
+
+enum class Currency {RUB, USD, EUR}
+
+typealias Amount = BigDecimal
