@@ -5,8 +5,6 @@ val kotlinSerializationJson: String by project
 val braveVersion: String by project
 val springBootVersion: String by project
 
-//val includeInJar by configurations.creating
-
 plugins {
     kotlin("jvm")
     kotlin("plugin.serialization")
@@ -38,18 +36,13 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:$kotlinSerializationJson")
     implementation("io.zipkin.brave:brave-instrumentation-okhttp3")
     implementation("io.micrometer:micrometer-tracing-bridge-brave")
+    implementation("org.springframework.modulith:spring-modulith-docs")
 
     implementation(project(":cart"))
     implementation(project(":catalog"))
     implementation(project(":notification"))
     implementation(project(":order"))
     implementation(project(":payment"))
-
-//    includeInJar(project(":cart"))
-//    includeInJar(project(":catalog"))
-//    includeInJar(project(":notification"))
-//    includeInJar(project(":order"))
-//    includeInJar(project(":payment"))
 
     runtimeOnly("com.h2database:h2")
     runtimeOnly("org.springframework.boot:spring-boot-starter-actuator")
@@ -74,16 +67,6 @@ tasks.withType<KotlinCompile> {
         jvmTarget = "17"
     }
 }
-
-//tasks.getByName<Jar>("jar") {
-//    duplicatesStrategy = DuplicatesStrategy.EXCLUDE
-//    includeInJar.forEach { println(it.name) }
-//    from(
-//        includeInJar
-//            .filter { it.name.startsWith("tech.") }
-//            .map { if (it.isDirectory) it else zipTree(it) }
-//    )
-//}
 
 tasks.withType<Test> {
     useJUnitPlatform()
